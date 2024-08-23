@@ -1,9 +1,42 @@
-import { Text, View } from "react-native";
+import { Text, View , FlatList} from "react-native";
+import Post from "../components/Post"
+
+
+const Posts = [
+  {
+    id: '0',
+    title: 'First Item',
+  },
+  {
+    id: '1',
+    title: 'Second Itedssm',
+  },
+  {
+    id: '2',
+    title: 'Third Item',
+  },
+];
+
+//type ItemProps = {title: string};
+
+// const Item = ({title}: ItemProps) => (
+//   <View>
+//     <Text>TTTT</Text>
+//   </View>
+// );
 
 export default function Index() {
   return (
-    <View className='flex-1 justify-center items-center bg-gray-300'>
-      <Text className='text-4xl font-bold justify-center'>Hello world!</Text>
-    </View>
+   
+   // use flatlist to ensure lazy rendering (improved perfornamce)!!
+   
+    <FlatList data={Posts} 
+    renderItem={({item}) => <View className='h-screen w-screen'><Post/></View>} 
+    keyExtractor={item => item.id}/>
+ 
+      
+
+   
+   
   );
 }
