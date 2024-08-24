@@ -1,7 +1,7 @@
 import { Dimensions, Text, View } from "react-native";
 import LikeButton from './LikeButton'
 import PostImage from './PostImage'
-import {useState, createContext, } from "react"
+import {useState} from "react"
 
 export default function Post() {
   

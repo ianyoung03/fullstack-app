@@ -25,7 +25,7 @@ interface PostImageProps {
   liked: number;
   setLiked: (liked: number) => void;
 }
-const PostImage: React.FC<PostImageProps> = ({liked, setLiked}) =>{
+const PostImage: React.FC<PostImageProps> = ({liked, setLiked}) => {
  
   // DOUBLE CLICK CODE
   const [tap, setTap] = useState("...");
