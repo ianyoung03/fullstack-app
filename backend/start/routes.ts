@@ -8,6 +8,7 @@
 */
 
 import router from '@adonisjs/core/services/router'
+const UsersController = () => import('#controllers/users_controller')
 
 //added myself. Health checks routing
 const HealthChecksController = () => import('#controllers/health_checks_controller')
@@ -21,3 +22,5 @@ router.get('/', async () => {
     hello: 'world',
   }
 })
+
+router.get('/users/:id', [UsersController, 'show'])

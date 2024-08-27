@@ -24,12 +24,29 @@ const Posts = [
 //     <Text>TTTT</Text>
 //   </View>
 // );
+const testApiCall = async() => {
+  try {
+    const response = await fetch(
+      'http:localhost:3333/users/1'//,{ 
+      //method: 'GET'
+      //}
+    );
+    const json = await response.json();
+    console.log(json);
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 export default function Index() {
+  // Test API Call
+  testApiCall();
   return (
-   
+
+    
+
+    
    // use flatlist to ensure lazy rendering (improved perfornamce)!!
-   
     <FlatList data={Posts} 
     renderItem={({item}) => <View className='h-screen w-screen'><Post/></View>} 
     keyExtractor={item => item.id}/>
