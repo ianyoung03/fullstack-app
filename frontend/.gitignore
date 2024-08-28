@@ -21,3 +21,6 @@ expo-env.d.ts
 
 #ignore provided example app
 example-app/
+
+#ignore the post bucket being used
+assets/fitdrop-posts-bucket/

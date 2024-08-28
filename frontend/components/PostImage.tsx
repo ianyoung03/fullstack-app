@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react"
 import {Image, Text, View, Pressable } from "react-native";
-
+import images from '../assets/imageMapping'
 
 // DOUBLE CLICK CODE: https://benhur-martins.medium.com/handling-double-and-single-tap-on-react-native-101b43bf4f2a
 // NOTE TO READER: i know defining tpyes as any in TS is a bad practice, but since this is just for demo I am being lazy
@@ -24,8 +24,9 @@ const debounce = (onSingle: any, onDouble: any) => {
 interface PostImageProps {
   liked: number;
   setLiked: (liked: number) => void;
+  image: string;
 }
-const PostImage: React.FC<PostImageProps> = ({liked, setLiked}) => {
+const PostImage: React.FC<PostImageProps> = ({liked, setLiked, image}) => {
  
   // DOUBLE CLICK CODE
   const [tap, setTap] = useState("...");
@@ -44,10 +45,17 @@ const PostImage: React.FC<PostImageProps> = ({liked, setLiked}) => {
   };
   // DOUBLE CLICK CODE ENDS
 
+  //console.log(image);
+  
+  const imageSource = images[image];
+  
+  if (!imageSource) {
+    return <View><Text>No image found</Text></View>;
+  }
 
   return(
     <Pressable onPress={onPress}>
-      <Image source={require('../assets/golf.jpeg')} />
+      <Image className='rounded-lg w-5/6 h-5/6 justify-center items-center' source={imageSource} />
     </Pressable>
   );
 }
