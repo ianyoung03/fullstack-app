@@ -5,8 +5,24 @@ import LikedPost from '#models/liked_post'
 export default class PostsController {
     async returnFeed({}: HttpContext){
         //normally would parameterized the num of posts but just hardcoding for demo purposes
-        const feedPosts = await Post.query().limit(10);
+        //const feedPosts = await Post.query().limit(10);
         
+        const feedPosts = [];
+        const usedPosts: number[] = [];
+        for (let i = 0; i < 10; ++i){
+            const id = Math.floor(Math.random() * (35-1)) + 1;
+            if (!usedPosts.includes(id)){
+                const item = await Post.find(id);
+                if(item){
+                    usedPosts.push(id);
+                    feedPosts.push(item);
+                }
+            } else {
+                --i;
+            }
+
+           
+        }
         // array we end up returning. Holds all relevant data for the frontend Post component
         const extendedPosts = [];
         

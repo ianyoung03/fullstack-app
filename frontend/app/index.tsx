@@ -1,6 +1,6 @@
-import { Text, View , FlatList} from "react-native";
+import { Text, View , FlatList, Dimensions, RefreshControl} from "react-native";
 import Post from "../components/Post"
-import {useState, useEffect} from "react"
+import {useState, useEffect, useCallback} from "react"
 
 const Posts = [
   {
@@ -40,7 +40,8 @@ const Posts = [
   }
 }*/
 
-
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 //const feed = testApiCall();
 export default function Index() {
@@ -48,6 +49,9 @@ export default function Index() {
   //testApiCall();
 
   const [feed, setFeed] = useState<any[]>([]);
+
+  const [refreshing, setRefreshing] = useState(true);
+
 
   const testApiCall = async() => {
     try {
@@ -68,16 +72,28 @@ export default function Index() {
 
   // this is great because this will run when our feed component initally mounts or renders. And remember it runs every time THIS component renders, not sub components within this one
   useEffect(() =>{
-    testApiCall();
-  }, [])
+    if(refreshing){
+      testApiCall();
+      setRefreshing(false);
+    }
+    
+  }, [refreshing])
+
+    // Function to handle refreshing
+    const onRefresh = useCallback(() => {
+      setRefreshing(true);
+      
+    }, []);
   return (
 
     
    // use flatlist to ensure lazy rendering (improved perfornamce)!!
     <FlatList data={feed} 
-    renderItem={({item}) => <View className='h-screen w-screen'><Post postData={item}/></View>} 
-    keyExtractor={item => item.id}/>
- 
+    renderItem={({item}) => <View style={{height: windowHeight*0.7}} className='flex-1 '><Post postData={item}/></View>} 
+    keyExtractor={item => item.id}
+    refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}
+    />
+  
       
 
    

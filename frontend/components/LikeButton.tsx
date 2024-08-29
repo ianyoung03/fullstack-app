@@ -13,8 +13,13 @@ export const LikeButton : React.FC<LikeButtonProps> = ({liked, setLiked}) => {
   }
 
   return (
-    <TouchableOpacity onPress={handlePress}>
-      <Text>{liked==1 ? "Liked" : "Unliked"}</Text>
+    <TouchableOpacity className='absolute bottom-12 right-5 z-10' onPress={handlePress}>
+      {(liked == 1) && (
+        <Text className='text-5xl z-10' >❤️</Text>
+      )}
+      {(liked == 0) && (
+        <Text className='text-5xl z-10' >🩶</Text>
+      )}
     </TouchableOpacity>
   );
 }

@@ -1,10 +1,11 @@
-import { View, Text, Button } from 'react-native';
+import { View, Text, Button, Image } from 'react-native';
 
 const Footer = () => (
-  <View >
-    <Text className="text-l font-bold">fitdrop</Text>
-    <Button title="Settings" onPress={() => { /* Navigate to settings */ }} />
-  </View>
+<View className='border-t border-solid border-white flex-row items-center mb-2 p-6 justify-between'>
+   <Text className='text-4xl'>🏠</Text>
+   <Text className='text-4xl'>📷</Text>
+   <Text className='text-4xl'>👤</Text>
+</View>
 );
 
 export default Footer;

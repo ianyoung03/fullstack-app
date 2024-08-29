@@ -54,9 +54,9 @@ const PostImage: React.FC<PostImageProps> = ({liked, setLiked, image}) => {
   }
 
   return(
-    <Pressable onPress={onPress}>
-      <Image className='rounded-lg w-5/6 h-5/6 justify-center items-center' source={imageSource} />
-    </Pressable>
+      <Pressable className = 'justify-center items-center' onPress={onPress}>
+        <Image style={{height: 510, width: 375}} className='rounded-lg w-11/12  z-0 mb-30' source={imageSource} />
+      </Pressable>
   );
 }
 
