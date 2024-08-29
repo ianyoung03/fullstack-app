@@ -2,63 +2,22 @@ import { Text, View , FlatList, Dimensions, RefreshControl} from "react-native";
 import Post from "../components/Post"
 import {useState, useEffect, useCallback} from "react"
 
-const Posts = [
-  {
-    id: '0',
-    title: 'First Item',
-  },
-  {
-    id: '1',
-    title: 'Second Itedssm',
-  },
-  {
-    id: '2',
-    title: 'Third Item',
-  },
-];
-
-//type ItemProps = {title: string};
-
-// const Item = ({title}: ItemProps) => (
-//   <View>
-//     <Text>TTTT</Text>
-//   </View>
-// );
-/*const testApiCall = async() => {
-  try {
-    const response = await fetch(
-      'http:localhost:3333/returnfeed'//,{ 
-      //method: 'GET'
-      //}
-    );
-    const json = await response.json();
-    console.log(json);
-    return json;
-    
-  } catch (error) {
-    console.error(error);
-  }
-}*/
-
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-//const feed = testApiCall();
 export default function Index() {
-  // Test API Call
-  //testApiCall();
-
+  
+  // state hook storing feed items as an array of JSON objs
   const [feed, setFeed] = useState<any[]>([]);
 
+  // used for refresh control in flatlist
   const [refreshing, setRefreshing] = useState(true);
 
 
   const testApiCall = async() => {
     try {
       const response = await fetch(
-        'http:localhost:3333/returnfeed'//,{ 
-        //method: 'GET'
-        //}
+        'http:localhost:3333/returnfeed'
       );
       const json = await response.json();
       console.log(json);
@@ -87,11 +46,12 @@ export default function Index() {
   return (
 
     
-   // use flatlist to ensure lazy rendering (improved perfornamce)!!
+    // Main feed renders in this flatlist
+    // rendering as flatlist instead of scrollview so it does lazy rendering
     <FlatList data={feed} 
-    renderItem={({item}) => <View style={{height: windowHeight*0.7}} className='flex-1 '><Post postData={item}/></View>} 
-    keyExtractor={item => item.id}
-    refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}
+      renderItem={({item}) => <View style={{height: windowHeight*0.7}} className='flex-1 '><Post postData={item}/></View>} 
+      keyExtractor={item => item.id}
+      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}
     />
   
       

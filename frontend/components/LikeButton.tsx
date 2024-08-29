@@ -6,8 +6,10 @@ interface LikeButtonProps {
     liked: number;
     setLiked: (liked: number) => void;
 }
+
 export const LikeButton : React.FC<LikeButtonProps> = ({liked, setLiked}) => {
   
+  // function that adjusts liked state when like button is pressed 
   const handlePress = () => {
     setLiked(1 - liked);
   }

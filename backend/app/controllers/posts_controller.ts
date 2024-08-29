@@ -3,12 +3,13 @@ import User from '#models/user'
 import Post from '#models/post'
 import LikedPost from '#models/liked_post'
 export default class PostsController {
+
+    // this function provides the homepage with post data for the feed
     async returnFeed({}: HttpContext){
-        //normally would parameterized the num of posts but just hardcoding for demo purposes
-        //const feedPosts = await Post.query().limit(10);
-        
         const feedPosts = [];
         const usedPosts: number[] = [];
+        
+        //picking 10 random images and adding to add to the feedPosts array
         for (let i = 0; i < 10; ++i){
             const id = Math.floor(Math.random() * (35-1)) + 1;
             if (!usedPosts.includes(id)){
@@ -23,10 +24,12 @@ export default class PostsController {
 
            
         }
-        // array we end up returning. Holds all relevant data for the frontend Post component
+        // this is the array we end up returning. Holds all relevant data for the frontend Post component in JSON format
         const extendedPosts = [];
         
-        
+        // this loop turns every feedPosts item into a json 
+        // then it adds some extra data needed for the front end (like status & user who posted it)
+        // then it adds it to the extendedPosts array to be returned
         for (const post of feedPosts) {
             
             // posts currently an array of Lucid objects. Converting to Json to safely add things
@@ -57,6 +60,7 @@ export default class PostsController {
             
         }
 
+        console.log("10 random posts have been delivered to the front end");
         return extendedPosts;
        
 

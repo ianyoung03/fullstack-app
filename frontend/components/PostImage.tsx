@@ -1,9 +1,8 @@
-import React, {useEffect, useState} from "react"
+import React, {useEffect, useState, useRef} from "react"
 import {Image, Text, View, Pressable } from "react-native";
 import images from '../assets/imageMapping'
 
-// DOUBLE CLICK CODE: https://benhur-martins.medium.com/handling-double-and-single-tap-on-react-native-101b43bf4f2a
-// NOTE TO READER: i know defining tpyes as any in TS is a bad practice, but since this is just for demo I am being lazy
+// DOUBLE CLICK CODE for liking posts: https://benhur-martins.medium.com/handling-double-and-single-tap-on-react-native-101b43bf4f2a
 let timer: any = null;
 const TIMEOUT = 500
 const debounce = (onSingle: any, onDouble: any) => {
@@ -45,8 +44,29 @@ const PostImage: React.FC<PostImageProps> = ({liked, setLiked, image}) => {
   };
   // DOUBLE CLICK CODE ENDS
 
-  //console.log(image);
+  //state to store if the like animation (big red heart when you like a post) is active
+  const [likeAnimation, setLikeAnimation] = useState(false);
   
+  const initialRender = useRef(true);
+  
+  useEffect(() => {
+    if (initialRender.current) {
+      initialRender.current = false;
+      return;
+    }
+    /* if a post is liked let the state of likeAnimation be true for one second, then set back to false
+     so that it can be rendered for 800ms in the return function*/
+    if (liked ){
+      initialRender.current = false;
+      setLikeAnimation(true);
+        const timer = setTimeout(() => {
+          setLikeAnimation(false);
+        }, 800);
+      }
+      return () => clearTimeout(timer);
+    }, [liked])
+  
+  /* accessing the image to be displayed */
   const imageSource = images[image];
   
   if (!imageSource) {
@@ -56,6 +76,9 @@ const PostImage: React.FC<PostImageProps> = ({liked, setLiked, image}) => {
   return(
       <Pressable className = 'justify-center items-center' onPress={onPress}>
         <Image style={{height: 510, width: 375}} className='rounded-lg w-11/12  z-0 mb-30' source={imageSource} />
+        {likeAnimation && (
+          <Text className='absolute text-9xl z-30 color-white'>❤️</Text>
+        )}
       </Pressable>
   );
 }
