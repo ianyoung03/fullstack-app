@@ -15,11 +15,6 @@ export default class LikedPostsController {
 
             console.log("Post " + params.postId + " was liked!");
         }
-
-        //const likedPostNow = await LikedPost.query().where('userId', 1).andWhere('postId', params.postId).first();
-        
-        //return likedPostNow;
-
        
     }
 
