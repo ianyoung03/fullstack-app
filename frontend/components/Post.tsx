@@ -11,7 +11,7 @@ const Post = ({postData} : any) => {
   //storing state of a post (is it liked or not). Initial state is determined by postData prop (the JSON received from the returnfeed API call)
   const [liked, setLiked] = useState(postData.liked);
 
- 
+  // storing if it is the initial render on launch. Used for managing state change of likes
   const initialRender = useRef(true); 
   
   //if state of a like changes and it's not the first render (when state is initialized so we don't need to change backend)
