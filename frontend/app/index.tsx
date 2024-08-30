@@ -1,6 +1,7 @@
-import { Text, View , FlatList, Dimensions, RefreshControl} from "react-native";
+import { View , FlatList, Dimensions, RefreshControl} from "react-native";
 import Post from "../components/Post"
 import {useState, useEffect, useCallback} from "react"
+import getFeed from "../api/feedApi"
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -14,25 +15,13 @@ export default function Index() {
   const [refreshing, setRefreshing] = useState(true);
 
 
-  const testApiCall = async() => {
-    try {
-      const response = await fetch(
-        'http:localhost:3333/returnfeed'
-      );
-      const json = await response.json();
-      console.log(json);
-      setFeed(json);
-      
-    } catch (error) {
-      console.error(error);
-    }
-  }
 
-
-  // this is great because this will run when our feed component initally mounts or renders. And remember it runs every time THIS component renders, not sub components within this one
+  // makes an API call to get feed on first render, and whenever refreshing value is changed
   useEffect(() =>{
     if(refreshing){
-      testApiCall();
+      getFeed().then(json => {
+        setFeed(json);
+      }).catch(error => console.error(error));
       setRefreshing(false);
     }
     

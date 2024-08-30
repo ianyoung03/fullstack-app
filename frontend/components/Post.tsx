@@ -1,7 +1,8 @@
-import { Dimensions, Text, View, Image } from "react-native";
+import {Text, View, Image } from "react-native";
 import LikeButton from './LikeButton'
 import PostImage from './PostImage'
 import {useState, useRef, useEffect} from "react"
+import updateLikeStatus from "../api/likeApi"
 
 
 
@@ -12,33 +13,16 @@ const Post = ({postData} : any) => {
 
  
   const initialRender = useRef(true); 
-  //have a useEffect here that runs based with state (liked) as a dependency. If that changes, run the effect
-  // use a useRef to skip the initial render
-
+  
+  //if state of a like changes and it's not the first render (when state is initialized so we don't need to change backend)
+  //then make a call to backend to update the like status
   useEffect(() => {
     if (initialRender.current){
         initialRender.current = false;
         return;
     }
 
-    const updateLikeStatus = async () => {
-        if (liked == 1){
-            try{   
-                const response = await fetch(`http:localhost:3333/storeLike/${postData.id}`);
-            } catch (error) {
-                console.log(error);
-            }
-        } else {
-            try{   
-                const response = await fetch(`http:localhost:3333/destroyLike/${postData.id}`);
-                
-            } catch (error) {
-                console.log(error);
-            }
-        }
-    }
-
-    updateLikeStatus();
+    updateLikeStatus(liked, postData.id);
   }, [liked])
 
 

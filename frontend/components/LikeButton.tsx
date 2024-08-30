@@ -1,13 +1,12 @@
-import { TouchableOpacity, Text, View } from "react-native";
-import React, {useState} from "react"
-import {useContext, createContext, } from "react"
+import { TouchableOpacity, Text } from "react-native";
+import React from "react"
 
 interface LikeButtonProps {
     liked: number;
     setLiked: (liked: number) => void;
 }
 
-export const LikeButton : React.FC<LikeButtonProps> = ({liked, setLiked}) => {
+const LikeButton : React.FC<LikeButtonProps> = ({liked, setLiked}) => {
   
   // function that adjusts liked state when like button is pressed 
   const handlePress = () => {
