@@ -2,21 +2,20 @@ Demo build of a fullstack social media app. https://youtu.be/tkdQ3zEx7Q0
 
 **Frontend:**
 
-ReactNative
+- ReactNative
 
-TailwindCSS
+- TailwindCSS
 
-Expo
+- Expo
 
-TypeScript
-
+- TypeScript
 **Backend:**
 
-AdonisJS
+- AdonisJS
 
-Lucid
+- Lucid ORM
 
-PostgreSQL
+- PostgreSQL
 
 
 
