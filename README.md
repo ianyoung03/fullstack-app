@@ -1,4 +1,4 @@
-Demo build of a fullstack social media app.
+Demo build of a fullstack social media app. https://youtu.be/tkdQ3zEx7Q0
 
 **Frontend:**
 ReactNative
@@ -10,6 +10,8 @@ TypeScript
 AdonisJS
 Lucid
 PostgreSQL
+
+
 
 
 
