@@ -1,4 +1,4 @@
-Demo build of a fullstack social media app. https://youtu.be/tkdQ3zEx7Q0
+Demo build of a fullstack social media app. Focused on core functionality across the stack over frontend aesthetics. Demo Video: https://youtu.be/tkdQ3zEx7Q0
 
 **Frontend:**
 
